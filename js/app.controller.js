@@ -70,7 +70,7 @@ function renderLocs(locs) {
 
 function onRemoveLoc(locId) {
     const confirmation = Swal.fire({
-        title: "Delete this location?",
+        title: "Are you sure?",
         text: "You won't be able to revert this!",
         icon: "warning",
         showCancelButton: true,
@@ -78,15 +78,15 @@ function onRemoveLoc(locId) {
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!"
     })
-        .then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                })
-            }
-        })
+    .then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+            })
+        }
+    })
         .then(locService.remove(locId))
         .then(() => {
             flashMsg('Location removed')
