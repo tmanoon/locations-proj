@@ -95,7 +95,7 @@ function onRemoveLoc(locId) {
         })
         .catch(err => {
             console.error('OOPs:', err)
-            flashMsg('Cannot remove location')
+            flashMsg('Location not removed')
         })
 }
 
