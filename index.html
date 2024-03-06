@@ -11,11 +11,11 @@
 
 <body>
     <header>
-        <h1>TravelTip</h1>
+        <h1 class="pacifico">TravelTip</h1>
         <div class="header-flex">
             <section class="selected-loc">
-                <h2>Location: <span class="loc-name"></span> <span class="loc-rate"></span></h2>
-                <h4 class="loc-address"></h4>
+                <h2 class="pacifico">Location: <span class="loc-name"></span> <span class="loc-rate"></span></h2>
+                <h4 class="loc-address pacifico"></h4>
                 <button onclick="app.onCopyLoc()">Copy location</button>
                 <button onclick="app.onShareLoc()">Share location</button>
                 <input name="loc-copier" />
@@ -41,13 +41,13 @@
                             oninput="app.onSetFilterBy({txt: this.value})" />
                     </div>
                     <div>
-                        <label>
+                        <label class="pacifico">
                             Min Rate:
                             <input type="range" min="0" max="5" value="0" class="filter-rate-range"
                                 onchange="this.title=this.value;app.onSetFilterBy({minRate: this.value})" />
                         </label>
                     </div>
-                    <p>
+                    <p class="pacifico">
                         Sort by:
                         <select class="sort-by" onchange="app.onSetSortBy()">
                             <option value="name">Name</option>
@@ -60,32 +60,32 @@
                         </label>
                     </p>
                 </section>
-                <h3>Locations</h3>
+                <h3 class="pacifico">Locations</h3>
                 <ul class="loc-list"></ul>
                 <section class="loc-stats">
-                    <h3>Statistics</h3>
+                    <h3 class="pacifico">Statistics</h3>
                     <div class="loc-stats-rate">
-                        <h4>By rate:</h4>
+                        <h4 class="pacifico">By rate:</h4>
                         <div class="pie"></div>
-                        <ul class="legend"></ul>
+                        <ul class="legend pacifico"></ul>
                     </div>
                     <div class="loc-stats-updates">
-                        <h4>By updates:</h4>
+                        <h4 class="pacifico">By updates:</h4>
                         <div class="pie"></div>
-                        <ul class="legend"></ul>
+                        <ul class="legend pacifico"></ul>
                     </div>
                 </section>
             </section>
         </div>
         <dialog id="locationDialog">
             <form method="dialog">
-                <h2 id="dialogTitle">Add location</h2>
+                <h2 class="pacifico" id="dialogTitle">Add location</h2>
                 <div>
-                    <label for="locationName">Location name:</label>
+                    <label class="pacifico" for="locationName">Location name:</label>
                     <input type="text" id="locationName" name="locationName" required>
                 </div>
                 <div>
-                    <label for="locationRate">Rate (1-5):</label>
+                    <label class="pacifico" for="locationRate">Rate (1-5):</label>
                     <input type="number" id="locationRate" name="locationRate" min="1" max="5" required>
                 </div>
                 <div>

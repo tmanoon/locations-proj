@@ -1,13 +1,14 @@
 /* BASICS */
-@import url(base/vars.css);
-@import url(base/base.css);
 
+@import url(base/base.css);
+@import url(base/helpers.css);
 /* COMPONENTS */
 @import url(cmps/user-msg.css);
 @import url(cmps/locs.css);
 @import url(cmps/selected-loc.css);
 @import url(cmps/header.css);
-
+@import url(setup/vars.css);
+@import url(setup/typography.css);
 /* DESKTOP */
 @media (min-width: 750px) {
     main {

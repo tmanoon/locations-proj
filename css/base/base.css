@@ -39,3 +39,7 @@ button {
     font-size: .8em;
 }
 
+button:hover {
+    scale: 1.2;
+    transition: scale 2s;
+}

@@ -54,11 +54,11 @@ function renderLocs(locs) {
         return `
         <li class="loc ${className}" data-id="${loc.id}">
             <h4>  
-                <span>${loc.name}</span>
-                <span class="distance">Distance: ${utilService.getDistance({ lat: loc.geo.lat, lng: loc.geo.lng }, { lat: gUserPos.lat, lng: gUserPos.lng }, 'K')} KM.</span>
+                <span class="pacifico">${loc.name}</span>
+                <span class="distance pacifico">Distance: ${utilService.getDistance({ lat: loc.geo.lat, lng: loc.geo.lng }, { lat: gUserPos.lat, lng: gUserPos.lng }, 'K')} KM.</span>
                 <span title="${loc.rate} stars">${'★'.repeat(loc.rate)}</span>
             </h4>
-            <p class="muted">
+            <p class="muted pacifico">
                 Created: ${utilService.elapsedTime(loc.createdAt)}
                 ${(loc.createdAt !== loc.updatedAt) ?
                 ` | Updated: ${utilService.elapsedTime(loc.updatedAt)}`

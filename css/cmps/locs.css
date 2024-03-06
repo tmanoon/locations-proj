@@ -60,7 +60,7 @@
 .loc-btns button:active,
 .search-btn:active,
 .btn-user-pos:active {
-    background-color: rgb(53, 118, 237);
+    background-color: rgb(237, 53, 160);
     translate: 0 0.3rem;
 }
 
