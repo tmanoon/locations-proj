@@ -85,9 +85,9 @@ function onRemoveLoc(locId) {
                 text: "Your file has been deleted.",
                 icon: "success"
             })
-        }
+            .then(locService.remove(locId))
+        } else return Promise.reject('Deletion canceled')
     })
-        .then(locService.remove(locId))
         .then(() => {
             flashMsg('Location removed')
             unDisplayLoc()
