@@ -30,7 +30,8 @@ export const locService = {
     save,
     setFilterBy,
     setSortBy,
-    getLocCountByRateMap
+    getLocCountByRateMap,
+    getLocCountByUpdateMap
 }
 
 function query() {
@@ -101,6 +102,21 @@ function getLocCountByRateMap() {
         })
 }
 
+function getLocCountByUpdateMap() {
+    return storageService.query(DB_KEY)
+        .then(locs => {
+            const locCountByUpdateMap = locs.reduce((map, loc) => {
+                const midnightTimestamp = new Date().setHours(0, 0, 0, 0) // Timestamp for midnight today
+                if (loc.updatedAt === loc.createdAt) map.never++
+                else if (loc.updatedAt >= midnightTimestamp) map.today++
+                else map.past++
+                return map
+            }, { today: 0, past: 0, never: 0 })
+            locCountByUpdateMap.total = locs.length
+            return locCountByUpdateMap
+        })
+}
+
 function setSortBy(sortBy = {}) {
     gSortBy = sortBy
 }
@@ -127,7 +143,7 @@ function _createDemoLocs() {
             },
             {
                 name: "Dekel Beach",
-                rate: 4,
+                rate: 5,
                 geo: {
                     address: "Derekh Mitsrayim 1, Eilat, 88000, Israel",
                     lat: 29.5393848,
@@ -137,7 +153,7 @@ function _createDemoLocs() {
             },
             {
                 name: "Dahab, Egypt",
-                rate: 5,
+                rate: 4,
                 geo: {
                     address: "Dahab, South Sinai, Egypt",
                     lat: 28.5096676,
