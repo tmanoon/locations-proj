@@ -7,7 +7,7 @@ export const mapService = {
     lookupAddressGeo,
     addClickListener
 }
-
+import { gUserPos } from '../app.controller.js'
 var gMap
 var gMarker
 
@@ -82,6 +82,8 @@ function getUserPosition() {
                 lat: res.coords.latitude,
                 lng: res.coords.longitude
             }
+            gUserPos.lat = latLng.lat
+            gUserPos.lng = latLng.lng
             resolve(latLng)
         }
         navigator.geolocation.getCurrentPosition(onSuccess, reject)

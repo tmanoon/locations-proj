@@ -1,7 +1,10 @@
 import { utilService } from './services/util.service.js'
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
-
+export let gUserPos = {
+    lat: null,
+    lng: null
+}
 window.onload = onInit
 
 // To make things easier in this project structure 
@@ -31,16 +34,28 @@ function onInit() {
             flashMsg('Cannot init map')
         })
 }
-
+// const sampleLoc = {
+//     id: 'GEouN',
+//     name: 'Dahab, Egypt',
+//     rate: 5,
+//     geo: {
+//         address: 'Dahab, South Sinai, Egypt',
+//         lat: 28.5096676,
+//         lng: 34.5165187,
+//         zoom: 11
+//     },
+//     createdAt: 1706562160181,
+//     updatedAt: 1706562160181
+// }
 function renderLocs(locs) {
     const selectedLocId = getLocIdFromQueryParams()
-
     var strHTML = locs.map(loc => {
         const className = (loc.id === selectedLocId) ? 'active' : ''
         return `
         <li class="loc ${className}" data-id="${loc.id}">
             <h4>  
                 <span>${loc.name}</span>
+                <span class="distance">Distance: ${utilService.getDistance({lat: loc.geo.lat, lng: loc.geo.lng},{lat: gUserPos.lat, lng: gUserPos.lng},'K')} KM.</span>
                 <span title="${loc.rate} stars">${'★'.repeat(loc.rate)}</span>
             </h4>
             <p class="muted">
@@ -251,7 +266,7 @@ function onSetSortBy() {
 
     const sortBy = {}
     sortBy[prop] = (isDesc) ? -1 : 1
-    
+
     // Shorter Syntax:
     // const sortBy = {
     //     [prop] : (isDesc)? -1 : 1
