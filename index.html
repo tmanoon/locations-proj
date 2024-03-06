@@ -5,25 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
+    <script src='https://kit.fontawesome.com/04cf2c934e.js' crossorigin='anonymous'></script>
     <title>TravelTip</title>
 </head>
 
 <body>
     <header>
         <h1>TravelTip</h1>
-        <section class="selected-loc">
-            <h2>Location: <span class="loc-name"></span> <span class="loc-rate"></span></h2>
-            <h4 class="loc-address"></h4>
-            <button onclick="app.onCopyLoc()">Copy location</button>
-            <button onclick="app.onShareLoc()">Share location</button>
-            <input name="loc-copier" />
-        </section>
-        <form class="form-search" onsubmit="app.onSearchAddress(event)">
-            <input type="text" name="address" placeholder="Search address" />
-            <button title="Search">🔍</button>
-            <button type="button" title="My Position" onclick="app.onPanToUserPos()" class="btn-user-pos">&nbsp;
-            </button>
-        </form>
+        <div class="header-flex">
+            <section class="selected-loc">
+                <h2>Location: <span class="loc-name"></span> <span class="loc-rate"></span></h2>
+                <h4 class="loc-address"></h4>
+                <button onclick="app.onCopyLoc()">Copy location</button>
+                <button onclick="app.onShareLoc()">Share location</button>
+                <input name="loc-copier" />
+            </section>
+            <form class="form-search" onsubmit="app.onSearchAddress(event)">
+                <input type="text" name="address" placeholder="Search address" />
+                <button title="Search" class="search-btn">
+                    <div><i class="fa-solid fa-magnifying-glass"></i></div>
+                </button>
+                <button type="button" title="My Position" onclick="app.onPanToUserPos()" class="btn-user-pos">
+                    <div><i class="fa-solid fa-crosshairs"></i></div>
+                </button>
+            </form>
+        </div>
     </header>
     <main>
         <div class="map"></div>
@@ -46,7 +52,7 @@
                         <select class="sort-by" onchange="app.onSetSortBy()">
                             <option value="name">Name</option>
                             <option value="rate" selected>Rate</option>
-                            <option value="time">Created time</option>
+                            <option value="time">Created</option>
                         </select>
                         <label>
                             <input class="sort-desc" type="checkbox" oninput="app.onSetSortBy()" />

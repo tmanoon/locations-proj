@@ -82,16 +82,15 @@ function updateQueryParams(queryParamsObj) {
 }
 
 function getColors() {
-    return ['#F44336',
-    '#FFEBEE',
-    // '#FFCDD2',
-    '#EF9A9A',
-    '#E57373',
-    '#EF5350',
-    '#F44336',
-    '#E53935',
-    '#D32F2F',
-    '#C62828']    
+    return [ '#75f4d2',
+    '#eb9bfd',
+    '#81b2fc',
+    '#ffdeb0',
+    '#ffb0f2',
+    '#cdb0ff',
+    '#b0ffde',
+    '#fd9bd3',
+    '#a39bfd']    
 }
 
 function getDistance(latLng1, latLng2, unit) {

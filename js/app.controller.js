@@ -65,9 +65,9 @@ function renderLocs(locs) {
                 : ''}
             </p>
             <div class="loc-btns">     
-               <button title="Delete" onclick="app.onRemoveLoc('${loc.id}')">🗑️</button>
-               <button title="Edit" onclick="app.onUpdateLoc('${loc.id}')">✏️</button>
-               <button title="Select" onclick="app.onSelectLoc('${loc.id}')">🗺️</button>
+               <button title="Delete" onclick="app.onRemoveLoc('${loc.id}')"><div><i class="fa-regular fa-trash-can"></i></div></button>
+               <button title="Edit" onclick="app.onUpdateLoc('${loc.id}')"><div><i class="fa-solid fa-pencil"></i></div></button>
+               <button title="Select" onclick="app.onSelectLoc('${loc.id}')"><div><i class="fa-solid fa-map-location-dot"></i></div></button>
             </div>     
         </li>`}).join('')
 
@@ -207,12 +207,12 @@ function displayLoc(loc) {
     mapService.panTo(loc.geo)
     mapService.setMarker(loc)
 
-    const el = document.querySelector('.selected-loc')
-    el.querySelector('.loc-name').innerText = loc.name
-    el.querySelector('.loc-address').innerText = loc.geo.address
-    el.querySelector('.loc-rate').innerHTML = '★'.repeat(loc.rate)
-    el.querySelector('[name=loc-copier]').value = window.location
-    el.classList.add('show')
+    const elSelected = document.querySelector('.selected-loc')
+    elSelected.querySelector('.loc-name').innerText = loc.name
+    elSelected.querySelector('.loc-address').innerText = loc.geo.address
+    elSelected.querySelector('.loc-rate').innerHTML = '★'.repeat(loc.rate)
+    elSelected.querySelector('[name=loc-copier]').value = window.location
+    elSelected.classList.add('show')
 
     utilService.updateQueryParams({ locId: loc.id })
 }

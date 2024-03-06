@@ -5,7 +5,24 @@
     height: 0;
     overflow: hidden;
     transition: .5s;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: 0.2em 0.2em 0.5em var(--bg3);
+}
+
+.selected-loc>button {
+    background-color: rgb(235, 159, 250);
+    color: rgb(110, 5, 208);
+    border-radius: 0.75em;
+    box-shadow: 0.1em 0.1em 0.5em var(--bg1);
+}
+
+
+.selected-loc>button:hover {
+    background-color: cornflowerblue;
+}
+
+.selected-loc>button:active {
+    background-color: rgb(53, 118, 237);
+    translate: 0 0.3rem;
 }
 
 .selected-loc.show {

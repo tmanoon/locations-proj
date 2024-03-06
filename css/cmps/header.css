@@ -1,0 +1,33 @@
+.header-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    text-align: center;
+}
+
+.form-search {
+    display: block;
+    margin-block-start: 1em;
+}
+
+.form-search input {
+    padding-inline: 1em;
+    border-radius: 0.75em;
+    background-color: var(--bg4);
+}
+
+
+.form-search>* {
+    margin-inline: 0.5em;
+    box-shadow: 0.1em 0.1em 0.5em var(--bg3);
+}
+
+@media (width > 800px) {
+    .header-flex {
+        flex-direction: row;
+    }
+}
