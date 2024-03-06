@@ -55,7 +55,7 @@ function renderLocs(locs) {
         <li class="loc ${className}" data-id="${loc.id}">
             <h4>  
                 <span>${loc.name}</span>
-                <span class="distance">Distance: ${utilService.getDistance({lat: loc.geo.lat, lng: loc.geo.lng},{lat: gUserPos.lat, lng: gUserPos.lng},'K')} KM.</span>
+                <span class="distance">Distance: ${utilService.getDistance({ lat: loc.geo.lat, lng: loc.geo.lng }, { lat: gUserPos.lat, lng: gUserPos.lng }, 'K')} KM.</span>
                 <span title="${loc.rate} stars">${'★'.repeat(loc.rate)}</span>
             </h4>
             <p class="muted">
@@ -93,16 +93,16 @@ function onRemoveLoc(locId) {
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!"
     })
-    .then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-            })
-            .then(locService.remove(locId))
-        } else return Promise.reject('Deletion canceled')
-    })
+        .then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                })
+                    .then(locService.remove(locId))
+            } else return Promise.reject('Deletion canceled')
+        })
         .then(() => {
             flashMsg('Location removed')
             unDisplayLoc()
@@ -128,15 +128,15 @@ function onSearchAddress(ev) {
 }
 
 function onAddLoc(geo) {
-    const locName = prompt('Loc name', geo.address || 'Just a place')
-    if (!locName) return
-
-    const loc = {
-        name: locName,
-        rate: +prompt(`Rate (1-5)`, '3'),
-        geo
-    }
-    locService.save(loc)
+    displayModal('add')
+        .then(({ name, rate }) => {
+            const loc = {
+                name,
+                rate,
+                geo
+            }
+            return locService.save(loc)
+        })
         .then((savedLoc) => {
             flashMsg(`Added Location (id: ${savedLoc.id})`)
             utilService.updateQueryParams({ locId: savedLoc.id })
@@ -174,20 +174,20 @@ function onPanToUserPos() {
 function onUpdateLoc(locId) {
     locService.getById(locId)
         .then(loc => {
-            const rate = prompt('New rate?', loc.rate)
-            if (rate !== loc.rate) {
-                loc.rate = rate
-                locService.save(loc)
-                    .then(savedLoc => {
-                        flashMsg(`Rate was set to: ${savedLoc.rate}`)
-                        loadAndRenderLocs()
-                    })
-                    .catch(err => {
-                        console.error('OOPs:', err)
-                        flashMsg('Cannot update location')
-                    })
-
-            }
+            displayModal('update', loc)
+                .then(({ name, rate }) => {
+                    loc.name = name
+                    loc.rate = rate
+                    return locService.save(loc)
+                })
+                .then(savedLoc => {
+                    flashMsg(`Location updated (id: ${savedLoc.id})`)
+                    loadAndRenderLocs()
+                })
+                .catch(err => {
+                    console.error('OOPs:', err)
+                    flashMsg('Cannot update location')
+                })
         })
 }
 
@@ -339,4 +339,41 @@ function cleanStats(stats) {
         return acc
     }, [])
     return cleanedStats
+}
+
+function displayModal(addOrUpdated, loc = null) {
+    return new Promise((resolve, reject) => {
+        const elModal = document.getElementById('locationDialog')
+        const elHeader = elModal.querySelector('#dialogTitle')
+        const elNameInput = elModal.querySelector('#locationName')
+        const elRateInput = elModal.querySelector('#locationRate')
+
+        if (addOrUpdated === 'add') {
+            elHeader.innerText = 'Add the new location name, please.'
+        } else if (addOrUpdated === 'update' && loc) {
+            elHeader.innerText = 'Update the location'
+            elNameInput.value = loc.name
+            elRateInput.value = loc.rate
+        }
+
+        elModal.showModal()
+        elModal.querySelector('form').addEventListener('submit', (event) => {
+            event.preventDefault()
+
+            const name = elNameInput.value
+            const rate = parseInt(elRateInput.value)
+
+            if (!name || !rate) {
+                reject('Please fill in all fields.')
+                return
+            }
+            resolve({ name, rate })
+            elModal.close()
+        })
+
+        elModal.querySelector('button[type="button"]').addEventListener('click', () => {
+            reject('Modal closed without saving.')
+            elModal.close()
+        })
+    })
 }

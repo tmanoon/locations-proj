@@ -77,6 +77,23 @@
                 </section>
             </section>
         </div>
+        <dialog id="locationDialog">
+            <form method="dialog">
+                <h2 id="dialogTitle">Add location</h2>
+                <div>
+                    <label for="locationName">Location name:</label>
+                    <input type="text" id="locationName" name="locationName" required>
+                </div>
+                <div>
+                    <label for="locationRate">Rate (1-5):</label>
+                    <input type="number" id="locationRate" name="locationRate" min="1" max="5" required>
+                </div>
+                <div>
+                    <button type="submit">Save</button>
+                    <button type="button" onclick="document.getElementById('locationDialog').close()">X</button>
+                </div>
+            </form>
+        </dialog>
     </main>
     <pre class="debug" hidden></pre>
     <div class="user-msg"></div>
